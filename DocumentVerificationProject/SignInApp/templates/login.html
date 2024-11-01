@@ -9,10 +9,13 @@
 </head>
 <body>
     <h1>Log In</h1>
+
     <div class="center">
         <form action="" method="POST">
             {% csrf_token %}
+
             {{ form.as_p }}
+            
             <button type="submit">Log In</button>
         </form>
     <div>

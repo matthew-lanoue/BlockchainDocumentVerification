@@ -1,7 +1,10 @@
 from django.db import models # type: ignore
+from django.contrib.auth import *
 
+
+UserA = get_user_model()
 # Create your models here.
-class User(models.Model):
-    username = models.CharField(max_length=200)   
-    password = models.CharField(max_length=200)   
+class Document(models.Model):
+    docname = models.CharField(max_length=200)   
+    authors = models.ManyToManyField(UserA, related_name="documents")
     
