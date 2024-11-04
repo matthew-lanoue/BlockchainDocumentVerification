@@ -33,6 +33,8 @@ def success(request):
     return HttpResponse("Logged In")
 # Create your views here.
 
+def WelcomePageView(request):
+    return render(request, 'welcome.html')
 
 def SignInView(request):
     
@@ -47,7 +49,6 @@ def SignInView(request):
                 
             if userInstance is not None: 
                 return redirect('success')
-
     else:
         formSignIn = LogInForm()
     return render(request,'login.html',{'form':formSignIn}) ##The {form : formSignIn} passes the form to the html

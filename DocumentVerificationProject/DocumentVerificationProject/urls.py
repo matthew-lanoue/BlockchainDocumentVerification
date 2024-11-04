@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin # type: ignore
 from django.urls import path, include # type: ignore
+from SignInApp.views import(WelcomePageView)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('SignIn/', include("SignInApp.urls") ),
+    path('', WelcomePageView, name='welcomePage' ),
 ]
