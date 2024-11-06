@@ -8,12 +8,16 @@
     <link rel="stylesheet" href="{% static 'signinstyle.css' %}">
 </head>
 <body>
-    <h1>Welcome</h1>
+    <h1>Upload Your Documents Here</h1>   
 
-    <a href="SignIn/">Sign In</a>     
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
 
-    
-    <a href="SignIn/register">Create an account</a>        
-    <a href="Upload-Documents">Verify</a>        
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+{% if title %}
+    <p>{{ title }}</p>
+{% endif %}
 </body>
 </html>

@@ -18,3 +18,7 @@ class LogInForm(forms.Form):
     username = forms.CharField(label="Username", max_length=150)
     password = forms.CharField(label="Password", max_length=150)
     
+class DocumentsForm(forms.Form):
+    file = forms.FileField(label="Select a file to verify")
+    
+    

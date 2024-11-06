@@ -1,7 +1,9 @@
 from django.shortcuts import * # type: ignore
 from django.http import HttpResponse # type: ignore
 from django.contrib.auth import *
+from  .models import *
 from .forms import *
+import hashlib
 
 UserA = get_user_model()
 
@@ -20,7 +22,7 @@ def RegisterView(request):
             userInstace = UserA(username=username)
             userInstace.set_password(request.POST.get('password'))
             userInstace.save()
-            return redirect('success')
+            return redirect('signInPage')
     else:
         formSignIn = SignInForm()
     
@@ -36,8 +38,32 @@ def success(request):
 def WelcomePageView(request):
     return render(request, 'welcome.html')
 
+def UploadPortalView(request):
+    # This statement below is used to redirect the user if they have not signed in
+    if not request.user.is_authenticated:
+        return redirect("signInPage")
+
+    title = None
+    if request.method == 'POST':
+        form = DocumentsForm(request.POST, request.FILES)
+        if form.is_valid():
+            uploaded_file = request.FILES['file']
+            title = uploaded_file.name
+            fileContent = uploaded_file.read()
+            fileHash = hashlib.sha256(fileContent).hexdigest()
+            docuInstace = Document(docname=title, fileHash=fileHash)
+            docuInstace.save()
+            ##This line below sets the author of the document
+            docuInstace.authors.set([request.user])
+            
+    else:
+        form = DocumentsForm()
+    return render(request, 'UploadPortal.html', {'form':DocumentsForm, 'title':title})
+
 def SignInView(request):
-    
+    #**LOGS OUT USER** 
+    logout(request) 
+    #*****************
     if request.method == 'POST':
         formSignIn = LogInForm(request.POST)
         
@@ -48,7 +74,8 @@ def SignInView(request):
             userInstance = authenticate(request,username=usernameInput, password=passwordInput)
                 
             if userInstance is not None: 
-                return redirect('success')
+                login(request, userInstance)
+                return redirect('UploadPage')
     else:
         formSignIn = LogInForm()
     return render(request,'login.html',{'form':formSignIn}) ##The {form : formSignIn} passes the form to the html
