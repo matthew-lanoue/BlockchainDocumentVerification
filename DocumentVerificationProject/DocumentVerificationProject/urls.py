@@ -18,9 +18,11 @@ from django.contrib import admin # type: ignore
 from django.urls import path, include # type: ignore
 from SignInApp.views import(WelcomePageView)
 from SignInApp.views import(UploadPortalView)
+from SignInApp.views import(VerifyPortalView)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('SignIn/', include("SignInApp.urls") ),
     path('', WelcomePageView, name='welcomePage' ),
     path('Upload-Documents/', UploadPortalView, name='UploadPage' ),
+    path('Verify-Documents/', VerifyPortalView, name='VerifyPage'),
 ]

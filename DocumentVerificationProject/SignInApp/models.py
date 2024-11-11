@@ -1,11 +1,9 @@
 from django.db import models # type: ignore
 from django.contrib.auth import *
-
-
-UserA = get_user_model()
+from django.contrib.auth.models import User 
 # Create your models here.
 class Document(models.Model):
     docname = models.CharField(max_length=200)   
-    authors = models.ManyToManyField(UserA, related_name="upload_documents")
+    authors = models.ManyToManyField(User, related_name="documents")
     fileHash = models.CharField(max_length=64, default='-1') 
     uploadTime = models.DateTimeField(auto_now_add=True)

@@ -1,8 +1,8 @@
 from django import forms   
-from .models import UserA
+from .models import User
 class SignInForm(forms.ModelForm):
     class Meta:
-        model = UserA
+        model = User
         fields = ['username', 'password']
         labels = {
             "username":"Username",
@@ -19,6 +19,6 @@ class LogInForm(forms.Form):
     password = forms.CharField(label="Password", max_length=150)
     
 class DocumentsForm(forms.Form):
-    file = forms.FileField(label="Select a file to verify")
+    file = forms.FileField(label="Select a file to upload")
     
     

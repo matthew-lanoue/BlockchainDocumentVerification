@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In With you Student ID</title>
+    <title>Verify Documents</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'signinstyle.css' %}">
 </head>
 <body>
-    <h1>Upload Your Documents Here</h1>   
-
+    <h1>Verify your Documents</h1>
+    
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
         {{ form.as_p }}
         <button type="submit">Upload</button>
     </form>
-{% if AuthorDocs %}
-    {% for docname in AuthorDocs %}
-        <p>{{ docname }}</p>
-    {%endfor%}
-{% endif %}
-</body>
+    {% if doctitle %}
+        {{ doctitle }}
+    {% endif %}
+    </body>
 </html>
