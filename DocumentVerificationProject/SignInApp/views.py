@@ -92,9 +92,9 @@ def VerifyPortalView(request):
             
             try:
                 doc = Document.objects.get(fileHash=str(fileHash))
-                document_title = "The document that you have uploaded '"+ doc.docname + "' is authentic"
+                document_title = "The document that you have uploaded originally called '"+ doc.docname + "' is authentic"
             except Document.DoesNotExist:
-                document_title = "The document does not exist"
+                document_title = "This document does not exist"
     else:
         form = DocumentsForm()
     return render(request, 'VerifyPortal.html', {'form':DocumentsForm , 'doctitle':document_title} )
