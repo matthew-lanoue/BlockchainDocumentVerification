@@ -16,8 +16,8 @@
         {{ form.as_p }}
         <button type="submit">Upload</button>
     </form>
-    {% if doctitle %}
-        {{ doctitle }}
+    {% if auth_message %}
+        {{ auth_message }}
     {% endif %}
     </body>
 </html>

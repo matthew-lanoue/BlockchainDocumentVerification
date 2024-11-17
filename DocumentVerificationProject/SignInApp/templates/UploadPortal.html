@@ -21,5 +21,12 @@
         <p>{{ docname }}</p>
     {%endfor%}
 {% endif %}
+
+{% if receipt_message %}
+    <p>Transaction succesful: 
+        <a href="receipt"> {{ receipt_message }}</a>
+    </p>
+    {% endif %}
+
 </body>
 </html>

@@ -19,10 +19,12 @@ from django.urls import path, include # type: ignore
 from SignInApp.views import(WelcomePageView)
 from SignInApp.views import(UploadPortalView)
 from SignInApp.views import(VerifyPortalView)
+from SignInApp.views import(ReceiptView)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('SignIn/', include("SignInApp.urls") ),
     path('', WelcomePageView, name='welcomePage' ),
     path('Upload-Documents/', UploadPortalView, name='UploadPage' ),
     path('Verify-Documents/', VerifyPortalView, name='VerifyPage'),
+    path('Upload-Documents/receipt', ReceiptView, name='ReceiptPage'),
 ]
