@@ -6,42 +6,11 @@ from .forms import *
 import hashlib
 from web3 import Web3
  
-w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:7545'))
+w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:8545'))
 
 #-------------------HERE IS THE BLOCKCHAIN CODE-------------------
 def DocMap_init():        
-    DocMap_contract_abi =  [
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "docName",
-				"type": "string"
-			}
-		],
-		"name": "removeDocument",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "docName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "hash",
-				"type": "string"
-			}
-		],
-		"name": "setDocumentHash",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
+    DocMap_contract_abi = [
 	{
 		"inputs": [
 			{
@@ -79,9 +48,40 @@ def DocMap_init():
 		],
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "docName",
+				"type": "string"
+			}
+		],
+		"name": "removeDocument",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "docName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "hash",
+				"type": "string"
+			}
+		],
+		"name": "setDocumentHash",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	}
 ]
-    DocMap_contract_address = "0xADb5eFACEAf94Eaa8A09CaDa06Ff7A5EFE908f99"
+    DocMap_contract_address = "0x9Ad3CE8Af4D7eedDC4D1fAEbDF91003fe514B848"
     DocMap_contract = w3.eth.contract(address=DocMap_contract_address, abi=DocMap_contract_abi)
     w3.eth.default_account = w3.eth.accounts[0]
     return DocMap_contract

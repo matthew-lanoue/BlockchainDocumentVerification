@@ -3,13 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In With you Student ID</title>
+    <title>Document Verification Portal</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'signinstyle.css' %}">
+    <link rel="stylesheet" href="{% static 'SignInApp/signinstyle.css' %}">
 </head>
 <body>
+    <nav>
+        <a href="/">Portal</a>
+        <a href="/SignIn/">Sign In</a>
+        <a href="/SignIn/register/">Register</a>
+        <a href="/Verify-Documents/">Verify Documents</a>
+    </nav>
     <h1>Log In</h1>
-
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
     <div class="center">
         <form action="" method="POST">
             {% csrf_token %}
@@ -17,8 +25,9 @@
             {{ form.as_p }}
             
             <button type="submit">Log In</button>
+            <button onclick="window.location.href='/SignIn/register/'" class="button-link">Create an account</button>
+
         </form>
     <div>
-<a href="register">Create an account</a>        
 </body>
 </html>
