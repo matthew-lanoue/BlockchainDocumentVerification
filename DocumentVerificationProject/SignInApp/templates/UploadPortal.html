@@ -3,30 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In With you Student ID</title>
+    <title>Upload Documents</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'signinstyle.css' %}">
+    <link rel="stylesheet" href="{% static 'SignInApp/signinstyle.css' %}">
 </head>
 <body>
-    <h1>Upload Your Documents Here</h1>   
+    <nav>
+        <a href="/">Home</a>
+        <a href="/SignIn/">Sign In</a>
+        <a href="/register/">Register</a>
+        <a href="/Verify-Documents/">Verify Documents</a>
+    </nav>
 
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+    <div class="upload-container">
+        <h1>Upload Your Documents</h1>
 
-        {{ form.as_p }}
-        <button type="submit">Upload</button>
-    </form>
-{% if AuthorDocs %}
-    {% for docname in AuthorDocs %}
-        <p>{{ docname }}</p>
-    {%endfor%}
-{% endif %}
+        <form method="POST" enctype="multipart/form-data" class="upload-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
 
-{% if receipt_message %}
-    <p>Transaction succesful: 
-        <a href="receipt"> {{ receipt_message }}</a>
-    </p>
-    {% endif %}
+        {% if AuthorDocs %}
+            <div class="documents-list">
+                <h2>Your Documents:</h2>
+                <ul>
+                    {% for docname in AuthorDocs %}
+                        <li>{{ docname }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
 
+        {% if receipt_message %}
+            <p class="success-message">
+                Transaction successful:
+                <a href="receipt">{{ receipt_message }}</a>
+            </p>
+        {% endif %}
+    </div>
 </body>
 </html>
